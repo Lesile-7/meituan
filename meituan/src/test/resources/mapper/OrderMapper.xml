@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jiande.test.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="cn.jiande.test.pojo.Order">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="saler_id" jdbcType="VARCHAR" property="salerId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="order_time" jdbcType="DATE" property="orderTime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="saler_phone" jdbcType="VARCHAR" property="salerPhone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.jiande.test.pojo.Order">
+  <!--   <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey> -->
+    insert into order (id,saler_id, user_id, order_time, 
+      state, user_phone, saler_phone, 
+      address, notes)
+      values (#{id,jdbcType=VARCHAR},#{salerId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{orderTime,jdbcType=DATE}, 
+      #{state,jdbcType=INTEGER}, #{userPhone,jdbcType=VARCHAR}, #{salerPhone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.jiande.test.pojo.Order">
+    update order
+    set saler_id = #{salerId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      order_time = #{orderTime,jdbcType=DATE},
+      state = #{state,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      saler_phone = #{salerPhone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, saler_id, user_id, order_time, state, user_phone, saler_phone, address, 
+    notes
+    from order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, saler_id, user_id, order_time, state, user_phone, saler_phone, address, 
+    notes
+    from order
+  </select>
+  <resultMap id="BaseResultMap" type="cn.jiande.test.pojo.Order">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="good_id" jdbcType="VARCHAR" property="goodId" />
+    <result column="saler_id" jdbcType="VARCHAR" property="salerId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="order_time" jdbcType="DATE" property="orderTime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="saler_phone" jdbcType="VARCHAR" property="salerPhone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.jiande.test.pojo.Order">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order (good_id, saler_id, user_id, 
+      order_time, state, user_phone, 
+      saler_phone, address, notes
+      )
+    values (#{goodId,jdbcType=VARCHAR}, #{salerId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{orderTime,jdbcType=DATE}, #{state,jdbcType=INTEGER}, #{userPhone,jdbcType=VARCHAR}, 
+      #{salerPhone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.jiande.test.pojo.Order">
+    update order
+    set good_id = #{goodId,jdbcType=VARCHAR},
+      saler_id = #{salerId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      order_time = #{orderTime,jdbcType=DATE},
+      state = #{state,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      saler_phone = #{salerPhone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, good_id, saler_id, user_id, order_time, state, user_phone, saler_phone, 
+    address, notes
+    from order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, good_id, saler_id, user_id, order_time, state, user_phone, saler_phone, 
+    address, notes
+    from order
+  </select>
+  <resultMap id="BaseResultMap" type="cn.jiande.test.pojo.Order">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="good_id" jdbcType="VARCHAR" property="goodId" />
+    <result column="saler_id" jdbcType="VARCHAR" property="salerId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="orderTime" jdbcType="DATE" property="ordertime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="saler_phone" jdbcType="VARCHAR" property="salerPhone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.jiande.test.pojo.Order">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order (good_id, saler_id, user_id, 
+      orderTime, state, user_phone, 
+      saler_phone, address, notes
+      )
+    values (#{goodId,jdbcType=VARCHAR}, #{salerId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{ordertime,jdbcType=DATE}, #{state,jdbcType=INTEGER}, #{userPhone,jdbcType=VARCHAR}, 
+      #{salerPhone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.jiande.test.pojo.Order">
+    update order
+    set good_id = #{goodId,jdbcType=VARCHAR},
+      saler_id = #{salerId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      orderTime = #{ordertime,jdbcType=DATE},
+      state = #{state,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      saler_phone = #{salerPhone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, good_id, saler_id, user_id, orderTime, state, user_phone, saler_phone, 
+    address, notes
+    from order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, good_id, saler_id, user_id, orderTime, state, user_phone, saler_phone, 
+    address, notes
+    from order
+  </select>
+  <resultMap id="BaseResultMap" type="cn.jiande.test.pojo.Order">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="good_id" jdbcType="VARCHAR" property="goodId" />
+    <result column="saler_id" jdbcType="VARCHAR" property="salerId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="orderTime" jdbcType="DATE" property="ordertime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="saler_phone" jdbcType="VARCHAR" property="salerPhone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.jiande.test.pojo.Order">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order (good_id, saler_id, user_id, 
+      orderTime, state, user_phone, 
+      saler_phone, address, notes
+      )
+    values (#{goodId,jdbcType=VARCHAR}, #{salerId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{ordertime,jdbcType=DATE}, #{state,jdbcType=INTEGER}, #{userPhone,jdbcType=VARCHAR}, 
+      #{salerPhone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.jiande.test.pojo.Order">
+    update order
+    set good_id = #{goodId,jdbcType=VARCHAR},
+      saler_id = #{salerId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      orderTime = #{ordertime,jdbcType=DATE},
+      state = #{state,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      saler_phone = #{salerPhone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, good_id, saler_id, user_id, orderTime, state, user_phone, saler_phone, 
+    address, notes
+    from order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, good_id, saler_id, user_id, orderTime, state, user_phone, saler_phone, 
+    address, notes
+    from order
+  </select>
+</mapper>

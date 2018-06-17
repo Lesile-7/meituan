@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jiande.mapper.OrdergoodMapper">
+	<resultMap id="BaseResultMap" type="cn.jiande.pojo.Ordergood">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="order_id" jdbcType="VARCHAR" property="orderId" />
+		<result column="good_id" jdbcType="VARCHAR" property="goodId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from ordergood
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="cn.jiande.pojo.Ordergood">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into ordergood (id,order_id, good_id)
+		values (#{id,jdbcType=VARCHAR},#{orderId,jdbcType=VARCHAR},
+		#{goodId,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="cn.jiande.pojo.Ordergood">
+		update ordergood
+		set order_id = #{orderId,jdbcType=VARCHAR},
+		good_id = #{goodId,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, order_id, good_id
+		from ordergood
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, order_id, good_id
+		from ordergood
+	</select>
+
+	<select id="selectByParam" parameterType="cn.jiande.pojo.Ordergood"
+		resultMap="BaseResultMap">
+		select id, order_id, good_id
+		from ordergood
+		<where>
+			<if test="id!=null and id!=''">
+				and id=#{id,jdbcType=VARCHAR}
+			</if>
+			<if test="order_id!=null and order_id!=''">
+				and order_id=#{order_id,jdbcType=VARCHAR}
+			</if>
+			<if test="good_id!=null and good_id!=''">
+				and good_id=#{good_id,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+
+
+
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jiande.mapper.ShoppingcartMapper">
+	<resultMap id="BaseResultMap" type="cn.jiande.pojo.Shoppingcart">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="saler_id" jdbcType="VARCHAR" property="salerId" />
+		<result column="good_id" jdbcType="VARCHAR" property="goodId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from shoppingcart
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="cn.jiande.pojo.Shoppingcart">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into shoppingcart (id,user_id, saler_id, good_id
+		)
+		values (#{id,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR},
+		#{salerId,jdbcType=VARCHAR}, #{goodId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="cn.jiande.pojo.Shoppingcart">
+		update shoppingcart
+		set user_id = #{userId,jdbcType=VARCHAR},
+		saler_id = #{salerId,jdbcType=VARCHAR},
+		good_id = #{goodId,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, user_id, saler_id, good_id
+		from shoppingcart
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByUserId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, user_id, saler_id, good_id
+		from shoppingcart
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, user_id, saler_id, good_id
+		from shoppingcart
+	</select>
+
+
+	<select id="selectByParam" parameterType="cn.jiande.pojo.Shoppingcart"
+		resultMap="BaseResultMap">
+		select id, user_id, saler_id, good_id
+		from shoppingcart
+		<where>
+			<if test="id!=null and id!=''">
+				and id=#{id,jdbcType=VARCHAR}
+			</if>
+			<if test="userId!=null and userId!=''">
+				and user_id=#{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="salerId!=null and salerId!=''">
+				and saler_id=#{salerId,jdbcType=VARCHAR}
+			</if>
+			<if test="goodId!=null and goodId!=''">
+				and good_id=#{goodId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<mvc:default-servlet-handler />
+	
+	<!-- 开启注解扫描,并指定包 -->
+	<context:component-scan base-package="cn.dragonjack.controller"></context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!--视图解析器-->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewNames">
+			<list>
+				<value>/jsp/**</value>
+			</list>
+		</property>
+		<!--此时，如果返回的viewname是index，会去到/WEB-INF/jsps/index.jsp-->
+		<property name="order" value="0"></property>
+		<property name="prefix" value="/WEB-INF/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- <bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		此时，如果返回的viewname是index，会去到/WEB-INF/jsps/index.jsp
+		<property name="prefix" value="/WEB-INF/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean> -->
+	
+	<!--spring mvc 拦截器定义-->
+    <mvc:interceptors>
+		<mvc:interceptor>
+			<!--拦截"/user/*"的请求-->
+			<mvc:mapping path="/user/*"/>
+			<!--拦截的bean-->
+			<bean class="cn.dragonjack.shiro.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

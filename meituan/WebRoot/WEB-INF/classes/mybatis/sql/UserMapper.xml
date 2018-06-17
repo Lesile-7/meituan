@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jiande.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.jiande.pojo.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.jiande.pojo.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (id,password, phone)
+    values (#{id,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.jiande.pojo.User">
+    update user
+    set password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, password, phone
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, password, phone
+    from user
+  </select>
+  
+  
+  <select id="selectByParam" parameterType="cn.jiande.pojo.User"
+		resultMap="BaseResultMap">
+		select id, password, phone
+  		from user
+		<where>
+			<if test="id!=null and id!=''">
+				and id=#{id,jdbcType=VARCHAR}
+			</if>
+			<if test="password!=null and password!=''">
+				and password=#{password,jdbcType=VARCHAR}
+			</if>
+			<if test="phone!=null and phone!=''">
+				and phone=#{phone,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+</mapper>
